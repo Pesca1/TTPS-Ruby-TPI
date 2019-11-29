@@ -14,7 +14,7 @@ default: &default
   encoding: utf8mb4
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: root
-  password:
+  password: root
   socket: /var/run/mysqld/mysqld.sock
 
 development:
@@ -50,5 +50,3 @@ test:
 production:
   <<: *default
   database: tpi_production
-  username: tpi
-  password: <%= ENV['TPI_DATABASE_PASSWORD'] %>
