@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   post '/sesiones', to: 'users#auth'
 
   get '/productos', to: 'products#index'
+  get '/productos/:code', to: 'products#show'
 end
