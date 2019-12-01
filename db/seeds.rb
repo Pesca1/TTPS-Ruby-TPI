@@ -7,12 +7,20 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 User.create(name: 'admin', password:'admin')
 
-Product.create(code: 'ABC123', description: 'Galletitas Portenitas', detail: 'Lorem ipsum dolor sit amen', price: 25.5)
-Product.create(code: 'ABC124', description: 'Pepas de la abuela', detail: 'Lorem ipsum dolor sit amen', price: 20.5)
+p1 = Product.create(code: 'ABC123', description: 'Galletitas Portenitas', detail: 'Lorem ipsum dolor sit amen', price: 25.5)
+p2 = Product.create(code: 'ABC124', description: 'Pepas de la abuela', detail: 'Lorem ipsum dolor sit amen', price: 20.5)
 Product.create(code: 'ABC125', description: '9 de Oro', detail: 'Lorem ipsum dolor sit amen', price: 30.5)
 Product.create(code: 'ABC126', description: 'Bay Biscuit', detail: 'Lorem ipsum dolor sit amen', price: 35.5)
 
-Item.create(product: Produc)
+Item.create!(product: p1)
+Item.create!(product: p1)
+Item.create!(product: p1)
+Item.create!(product: p2)
+Item.create!(product: p2)
+Item.create!(product: p2)
+Item.create!(product: p2)
+Item.create!(product: p2)
+Item.create!(product: p2)
 
 IvaCondition.create(name: 'IVA Responsable Inscripto')
 IvaCondition.create(name: 'IVA Responsable no Inscripto')
