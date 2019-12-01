@@ -16,4 +16,8 @@ class Token < ApplicationRecord
     where(" user_id = ? ", user.id).where(" created_at >= ? ", 30.minutes.ago).any?
   end
 
+  def self.is_valid(token)
+    not Token.where(" created_at >= ? ", 30.minutes.ago).find_by(token: token).nil?
+  end
+
 end
