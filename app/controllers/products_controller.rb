@@ -24,4 +24,12 @@ class ProductsController < ApplicationController
     end
   end
 
+  def show_items
+    if not (p = Product.find_by(code: params[:code])).nil?
+      render jsonapi: p
+    else
+      head :not_found
+    end
+  end
+
 end
