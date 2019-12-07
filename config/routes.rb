@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   post '/usuarios', to: 'users#create'
   post '/sesiones', to: 'users#auth'
 
-  get '/productos', to: 'products#index'
-  get '/productos/:code', to: 'products#show'
-  get '/productos/:code/items', to: 'products#show_items'
+  get  '/productos', to: 'products#index'
+  get  '/productos/:code', to: 'products#show'
+  get  '/productos/:code/items', to: 'products#show_items'
+  post '/productos/:code/items', to: 'products#add_items'
 end

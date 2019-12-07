@@ -1,4 +1,5 @@
 class SerializableItem < JSONAPI::Serializable::Resource
   type 'items'
-  attributes :code, :description, :detail, :price, :stock
+  attributes :price, :state
+  belongs_to :product
 end

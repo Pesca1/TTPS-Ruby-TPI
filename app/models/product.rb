@@ -1,4 +1,12 @@
 class Product < ApplicationRecord
+  validates :code, presence: true, uniqueness: true
+  validates :description, presence: true, length: { maximum: 200 }
+  validates :detail, presence: true
+  validates :price, presence: true
+  validates_each :code do |record, attr, value|
+    record.errors.add(attr, 'must have 3 letters and 6 numbers') if !(value =~ /^[a-zA-Z]{3}\d{6}$/)
+  end
+
   has_many :items
 
   def stock
@@ -12,4 +20,11 @@ class Product < ApplicationRecord
   def self.scarce
     self.select { |p| p.stock > 0 and p.stock <= 5 }
   end
+
+  def add_items(amount)
+    new_items = []
+    amount.times { new_items.push Item.create(product: self) }
+    new_items
+  end
+
 end

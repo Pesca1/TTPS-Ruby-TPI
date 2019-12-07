@@ -2,10 +2,44 @@
 
 one:
   product: one
-  reservation: one
   price: 1.5
 
 two:
+  product: one
+  price: 1.5
+ 
+three:
+  product: one
+  price: 1.5
+
+four:
+  product: one
+  price: 1.5
+
+five:
+  product: one
+  price: 1.5
+
+six:
+  product: one
+  price: 1.5
+
+seven:
   product: two
-  reservation: two
+  price: 1.5
+
+eight:
+  product: two
+  price: 1.5
+
+nine:
+  product: two
+  price: 1.5
+
+nine:
+  product: two
+  price: 1.5
+
+ten:
+  product: two
   price: 1.5

@@ -1,13 +1,19 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  code: MyString
+  code: QWE123456
   description: MyString
   detail: MyText
   price: 1.5
 
 two:
-  code: MyString
+  code: QWE123457
+  description: MyString
+  detail: MyText
+  price: 1.5
+
+three:
+  code: QWE123458
   description: MyString
   detail: MyText
   price: 1.5

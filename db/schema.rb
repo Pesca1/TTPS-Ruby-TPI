@@ -13,34 +13,33 @@
 ActiveRecord::Schema.define(version: 2019_11_29_313836) do
 
   create_table "clients", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.string "name"
-    t.string "email"
+    t.string "name", null: false
+    t.string "email", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_clients_on_name", unique: true
   end
 
   create_table "items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "product_id", null: false
-    t.bigint "reservation_id"
     t.float "price"
     t.string "saleable_type"
     t.bigint "saleable_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["product_id"], name: "index_items_on_product_id"
-    t.index ["reservation_id"], name: "index_items_on_reservation_id"
     t.index ["saleable_type", "saleable_id"], name: "index_items_on_saleable_type_and_saleable_id"
   end
 
   create_table "iva_conditions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name"], name: "index_iva_conditions_on_name"
   end
 
   create_table "phones", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.integer "number"
+    t.integer "number", null: false
     t.bigint "client_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -48,10 +47,10 @@ ActiveRecord::Schema.define(version: 2019_11_29_313836) do
   end
 
   create_table "products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.string "code"
-    t.string "description"
-    t.text "detail"
-    t.float "price"
+    t.string "code", null: false
+    t.string "description", null: false
+    t.text "detail", null: false
+    t.float "price", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["code"], name: "index_products_on_code"
@@ -60,8 +59,8 @@ ActiveRecord::Schema.define(version: 2019_11_29_313836) do
   create_table "reservations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "user_id"
-    t.bigint "client_id"
+    t.bigint "user_id", null: false
+    t.bigint "client_id", null: false
     t.bigint "item_id"
     t.index ["client_id"], name: "index_reservations_on_client_id"
     t.index ["item_id"], name: "index_reservations_on_item_id"
@@ -86,15 +85,14 @@ ActiveRecord::Schema.define(version: 2019_11_29_313836) do
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.string "name"
-    t.string "password"
+    t.string "name", null: false
+    t.string "password", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name"], name: "index_users_on_name", unique: true
   end
 
   add_foreign_key "items", "products"
-  add_foreign_key "items", "reservations"
   add_foreign_key "phones", "clients"
   add_foreign_key "reservations", "clients"
   add_foreign_key "reservations", "items"
