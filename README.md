@@ -1,24 +1,8 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Comentarios:
+- Los endpoints están funcionando desde la creación del usuario hasta el listado y detalle de reservas.
+- A pesar de que faltan cosas, mi mayor duda es acerca de los tests. Primero porque no me estaban funcionando como esperaba los fixtures (no se crean todos los items por ejemplo), y segundo porque no se si todo lo que estoy probando es apropiado.
+  De todas maneras, solo hice algunos en el producto.
+- Me quedo con dudas acerca de JSON:API y si lo implementé bien, ya que me costó traducir algunas cosas del enunciado a la especificación. Por ejemplo, el formato de petición para la creación de reservas.
+- Usé la gema 'jsonapi-rails' para la serialización y deserialización del json.
