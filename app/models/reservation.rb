@@ -1,5 +1,15 @@
 class Reservation < ApplicationRecord
   belongs_to :user
   belongs_to :client
+  belongs_to :sale, optional: true
   has_many :items, as: :saleable
+
+  def self.not_sold
+    self.select { |r | r.sale.nil? }
+  end
+
+  def price
+    items.map(&:price).sum
+  end
+
 end

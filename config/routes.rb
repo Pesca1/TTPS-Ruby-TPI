@@ -7,4 +7,8 @@ Rails.application.routes.draw do
   get  '/productos/:code', to: 'products#show'
   get  '/productos/:code/items', to: 'products#show_items'
   post '/productos/:code/items', to: 'products#add_items'
+
+  get  '/reservas',     to: 'reservations#index'
+  get  '/reservas/:id', to: 'reservations#show'
+  post '/reservas',     to:'reservations#create'
 end

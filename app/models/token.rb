@@ -20,4 +20,8 @@ class Token < ApplicationRecord
     not Token.where(" created_at >= ? ", 30.minutes.ago).find_by(token: token).nil?
   end
 
+  def self.get_user(token)
+    Token.find_by(token: token).user
+  end
+
 end

@@ -61,9 +61,11 @@ ActiveRecord::Schema.define(version: 2019_11_29_313836) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id", null: false
     t.bigint "client_id", null: false
+    t.bigint "sale_id"
     t.bigint "item_id"
     t.index ["client_id"], name: "index_reservations_on_client_id"
     t.index ["item_id"], name: "index_reservations_on_item_id"
+    t.index ["sale_id"], name: "index_reservations_on_sale_id"
     t.index ["user_id"], name: "index_reservations_on_user_id"
   end
 
@@ -96,6 +98,7 @@ ActiveRecord::Schema.define(version: 2019_11_29_313836) do
   add_foreign_key "phones", "clients"
   add_foreign_key "reservations", "clients"
   add_foreign_key "reservations", "items"
+  add_foreign_key "reservations", "sales"
   add_foreign_key "reservations", "users"
   add_foreign_key "sales", "clients"
   add_foreign_key "sales", "users"
