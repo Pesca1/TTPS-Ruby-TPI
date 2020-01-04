@@ -10,7 +10,7 @@ class Product < ApplicationRecord
   has_many :items
 
   def stock
-    items.count
+    items.select(&:is_in_stock).count
   end
 
   def self.in_stock
@@ -25,6 +25,13 @@ class Product < ApplicationRecord
     new_items = []
     amount.times { new_items.push Item.create(product: self) }
     new_items
+  end
+
+  def reserve(amount, reservation)
+    items.select(&:is_in_stock).first(amount).each do |i|
+      i.saleable= reservation
+      i.save
+    end
   end
 
 end

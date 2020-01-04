@@ -5,11 +5,20 @@ class Reservation < ApplicationRecord
   has_many :items, as: :saleable
 
   def self.not_sold
-    self.select { |r | r.sale.nil? }
+    self.select { |r | !r.is_sold }
+  end
+
+  def is_sold
+    !sale.nil?
   end
 
   def price
     items.map(&:price).sum
+  end
+
+  def sell(user)
+    self.sale= Sale.create(user: user, client: client)
+    self.save
   end
 
 end
