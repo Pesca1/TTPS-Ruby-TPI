@@ -34,4 +34,12 @@ class Product < ApplicationRecord
     end
   end
 
+  def sell(amount, sale)
+    items.select(&:is_in_stock).first(amount).each do |i|
+      i.saleable= sale
+      i.price = self.price
+      i.save
+    end
+  end
+
 end

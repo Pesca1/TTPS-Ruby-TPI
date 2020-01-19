@@ -26,7 +26,15 @@ class SalesController < ApplicationController
 
   def create
     if create_params_validation(params[:sale])
-      render json: params[:sale]
+      sale = params[:sale]
+      user = Token.get_user(request.headers['Authorization'])
+      client = Client.find_by(id: sale[:client_id])
+      s = Sale.create(user: user, client: client)
+      sale[:products].each do | p |
+        Product.find_by(id: p[:id]).sell(p[:amount], s)
+      end
+      s.reload
+      render jsonapi: s
     end
   end
 
