@@ -7,7 +7,7 @@ class Item < ApplicationRecord
   end
 
   def is_reserved
-    (! is_in_stock) && (saleable.is_a? Reservation) && (!saleable.is_sold)
+    (! is_in_stock) && (saleable.is_a? Reservation)
   end
 
   def is_sold

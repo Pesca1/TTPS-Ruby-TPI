@@ -18,6 +18,13 @@ class Reservation < ApplicationRecord
 
   def sell(user)
     self.sale= Sale.create(user: user, client: client)
+    items.each do |i|
+      logger.debug "PRECIO 1: "+i.price.to_s
+      i.price= i.price
+      logger.debug "PRECIO 2: "+i.price.to_s
+      i.saleable= self.sale
+      i.save
+    end
     self.save
   end
 

@@ -13,4 +13,8 @@ Rails.application.routes.draw do
   post   '/reservas',     to: 'reservations#create'
   put    '/reservas/:id/vender', to: 'reservations#sell'
   delete '/reservas/:id', to: 'reservations#delete'
+
+  get  '/ventas',     to: 'sales#index'
+  get  '/ventas/:id', to: 'sales#show'
+  post '/ventas',     to: 'sales#create'
 end
