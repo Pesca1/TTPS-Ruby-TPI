@@ -1,15 +1,18 @@
 class Token < ApplicationRecord
+  include Tokenable
   belongs_to :user
   validates :token, uniqueness: true
 
   def self.generate(user)
-    t = [*('a'..'z'),*('0'..'9')].shuffle[0,50].join
-    token = new(token: t, user: user)
-    while not token.save do
-      t = [*('a'..'z'),*('0'..'9')].shuffle[0,50].join
-      token = new(token: t, user: user)
+    if has_valid_token(user)
+      return find_by(user: user)
     end
-    token
+    where(user_id: user.id).delete_all
+    token = new(token: generate_token(), user: user)
+    while not token.save do
+      token = new(token: generate_token(), user: user)
+    end
+    return token
   end
 
   def self.has_valid_token(user)
