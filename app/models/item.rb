@@ -2,6 +2,9 @@ class Item < ApplicationRecord
   belongs_to :product
   belongs_to :saleable, polymorphic: true, optional: true
 
+  validates :product, presence: true
+  validates_associated :product, :saleable
+
   def is_in_stock
     saleable.nil?
   end
