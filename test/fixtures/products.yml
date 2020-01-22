@@ -17,3 +17,9 @@ three:
   description: MyString
   detail: MyText
   price: 1.5
+
+four:
+  code: QWE123459
+  description: MyString
+  detail: MyText
+  price: 1.5

@@ -1,5 +1,5 @@
 class Product < ApplicationRecord
-  validates :code, presence: true, uniqueness: true
+  validates :code, presence: true, uniqueness: { case_sensitive: true }
   validates :description, presence: true, length: { maximum: 200 }
   validates :detail, presence: true
   validates :price, presence: true
@@ -24,6 +24,7 @@ class Product < ApplicationRecord
   def add_items(amount)
     new_items = []
     amount.times { new_items.push Item.create(product: self) }
+    reload
     new_items
   end
 

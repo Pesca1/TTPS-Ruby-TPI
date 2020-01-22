@@ -1,1 +1,7 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: John Doe
+  email: john_doe@mail.com
+  iva_condition_id: 1
+  cuit: 11111

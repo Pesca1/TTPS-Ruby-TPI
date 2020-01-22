@@ -10,13 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_29_313836) do
+ActiveRecord::Schema.define(version: 2019_11_29_213837) do
 
   create_table "clients", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name", null: false
     t.string "email", null: false
+    t.string "cuit", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "iva_condition_id"
+    t.index ["iva_condition_id"], name: "index_clients_on_iva_condition_id"
     t.index ["name"], name: "index_clients_on_name", unique: true
   end
 
@@ -62,9 +65,7 @@ ActiveRecord::Schema.define(version: 2019_11_29_313836) do
     t.bigint "user_id", null: false
     t.bigint "client_id", null: false
     t.bigint "sale_id"
-    t.bigint "item_id"
     t.index ["client_id"], name: "index_reservations_on_client_id"
-    t.index ["item_id"], name: "index_reservations_on_item_id"
     t.index ["sale_id"], name: "index_reservations_on_sale_id"
     t.index ["user_id"], name: "index_reservations_on_user_id"
   end
@@ -94,10 +95,10 @@ ActiveRecord::Schema.define(version: 2019_11_29_313836) do
     t.index ["name"], name: "index_users_on_name", unique: true
   end
 
+  add_foreign_key "clients", "iva_conditions"
   add_foreign_key "items", "products"
   add_foreign_key "phones", "clients"
   add_foreign_key "reservations", "clients"
-  add_foreign_key "reservations", "items"
   add_foreign_key "reservations", "sales"
   add_foreign_key "reservations", "users"
   add_foreign_key "sales", "clients"
