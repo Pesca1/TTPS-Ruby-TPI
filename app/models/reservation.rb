@@ -4,6 +4,10 @@ class Reservation < ApplicationRecord
   belongs_to :sale, optional: true
   has_many :items, as: :saleable
 
+  validates :user, presence: true
+  validates :client, presence: true
+  validates :items, presence: true
+
   def self.not_sold
     self.select { |r | !r.is_sold }
   end
