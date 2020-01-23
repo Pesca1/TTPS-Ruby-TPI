@@ -7,8 +7,8 @@ class CreateReservations < ActiveRecord::Migration[6.0]
 
       t.timestamps
     end
-    add_reference :reservations, :user, foreign_key: true, null: false
-    add_reference :reservations, :client, foreign_key: true, null: false
+    add_reference :reservations, :user, foreign_key: true#, null: false
+    add_reference :reservations, :client, foreign_key: true#, null: false
     add_reference :reservations, :sale, foreign_key: true
   end
 end
