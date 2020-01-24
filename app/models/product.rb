@@ -31,8 +31,10 @@ class Product < ApplicationRecord
   def reserve(amount, reservation)
     items.select(&:is_in_stock).first(amount).each do |i|
       i.saleable= reservation
-      i.save
+      reservation.items << i
+      i.save!
     end
+    reservation.save!
   end
 
   def sell(amount, sale)

@@ -20,9 +20,8 @@ class ReservationTest < ActiveSupport::TestCase
     assert_equal products(:one).items.map(&:price).sum, r.price
   end
 
-  test "sell is correct" do
-    r = Reservation.new(client: clients(:one), user: users(:one))
-    products(:one).reserve(2, r)
+  test "sell and is_sold are correct" do
+    r = reservations(:one)
     assert_not r.is_sold
     r.sell users(:one)
     assert r.is_sold
@@ -32,7 +31,13 @@ class ReservationTest < ActiveSupport::TestCase
   end
 
   test "not_sold is correct" do
-    flunk
+    r = Reservation.new(client: clients(:one), user: users(:one))
+    products(:one).reserve 1, r
+    r.sell users(:one)
+    assert r.is_sold
+    assert !reservations(:one).is_sold
+    assert_not_includes Reservation.not_sold, r
+    assert_includes     Reservation.not_sold, reservations(:one)
   end
 
 end

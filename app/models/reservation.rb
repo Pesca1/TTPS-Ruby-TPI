@@ -6,7 +6,13 @@ class Reservation < ApplicationRecord
 
   validates :user, presence: true
   validates :client, presence: true
-  validates :items, presence: true
+  validate  :item_presence
+
+  private def item_presence
+    if sale.nil? && items.empty?
+      errors.add(:items, :blank)
+    end
+  end
 
   def self.not_sold
     self.select { |r | !r.is_sold }
