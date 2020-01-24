@@ -10,13 +10,13 @@ class SaleTest < ActiveSupport::TestCase
     end
     s.user= users(:one)
     s.client= clients(:one)
-    s.items << products(:one).items.first
+    products(:one).sell(1, s)
     assert s.valid?
   end
 
   test "price is correct" do
     s = Sale.new(user: users(:one), client: clients(:one))
-    s.items << products(:one).items.first(2)
+    products(:one).sell(2, s)
     assert_equal products(:one).price*2, s.price
   end
 

@@ -1,7 +1,9 @@
 class Token < ApplicationRecord
   include Tokenable
   belongs_to :user
-  validates :token, uniqueness: true
+  validates :token, uniqueness: true, presence: true
+  validates :user,  uniqueness: true, presence: true
+  validates_associated :user
 
   def self.generate(user)
     if has_valid_token(user)
@@ -20,11 +22,13 @@ class Token < ApplicationRecord
   end
 
   def self.is_valid(token)
-    not Token.where(" created_at >= ? ", 30.minutes.ago).find_by(token: token).nil?
+    ! Token.where(" created_at >= ? ", 30.minutes.ago).find_by(token: token).nil?
   end
 
   def self.get_user(token)
-    Token.find_by(token: token).user
+    t = Token.find_by(token: token)
+    return t.user if !t.nil?
+    return nil
   end
 
 end

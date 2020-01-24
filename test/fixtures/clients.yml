@@ -3,5 +3,5 @@
 one:
   name: John Doe
   email: john_doe@mail.com
-  iva_condition_id: 1
+  iva_condition: one
   cuit: 11111
