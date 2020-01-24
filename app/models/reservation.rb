@@ -24,10 +24,12 @@ class Reservation < ApplicationRecord
     self.sale= Sale.create(user: user, client: client)
     items.each do |i|
       i.price= i.price
+      self.sale.items << i
       i.saleable= self.sale
-      i.save
+      i.save!
     end
-    self.save
+    self.sale.save!
+    self.save!
   end
 
 end

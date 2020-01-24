@@ -11,3 +11,10 @@ fix_<%= i %>:
   product: two
   price: 1.5
 <% end %>
+
+<% 12.upto(13) do |i| %>
+fix_<%= i %>:
+  product: three
+  price: 1.5
+  saleable: one (Reservation)
+<% end %>

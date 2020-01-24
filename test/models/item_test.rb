@@ -25,14 +25,14 @@ class ItemTest < ActiveSupport::TestCase
 
   test "price is correct" do
     product = products(:one)
-    i = Item.new(product: product)
+    i = product.items.first
     assert_equal product.price, i.price
-    i.saleable = Reservation.new
+    r = reservations(:one)
+    r.items << i
     product.price= product.price + 1
     assert_equal product.price, i.price
-    i.saleable.sell User.new
+    r.sell users(:one)
     product.price= product.price + 1
-    product.save
     assert_equal product.price, i.price + 1
   end
 
