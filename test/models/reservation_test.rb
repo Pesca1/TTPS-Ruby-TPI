@@ -15,9 +15,8 @@ class ReservationTest < ActiveSupport::TestCase
   end
 
   test "price is correct" do
-    r = Reservation.new
-    r.items << products(:one).items
-    assert_equal products(:one).items.map(&:price).sum, r.price
+    r = reservations(:one)
+    assert_equal products(:three).items.map(&:price).sum, r.price
   end
 
   test "sell and is_sold are correct" do

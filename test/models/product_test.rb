@@ -40,9 +40,9 @@ class ProductTest < ActiveSupport::TestCase
   end
 
   test "scarce is correct" do
-    assert     Product.scarce.include? products(:one)
-    assert_not Product.scarce.include? products(:two)
-    assert_not Product.scarce.include? products(:three)
+    assert_includes     Product.scarce, products(:one)
+    assert_includes     Product.scarce, products(:three)
+    assert_not_includes Product.scarce, products(:two)
   end
 
   test "add_items, reserve and sell are correct" do

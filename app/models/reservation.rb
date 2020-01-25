@@ -15,7 +15,7 @@ class Reservation < ApplicationRecord
   end
 
   def self.not_sold
-    self.select { |r | !r.is_sold }
+    where(sale_id: nil)
   end
 
   def is_sold
@@ -23,7 +23,8 @@ class Reservation < ApplicationRecord
   end
 
   def price
-    items.map(&:price).sum
+    #items.map(&:price).sum
+    items.joins(:product).select('products.price').sum('products.price')
   end
 
   def sell(user)

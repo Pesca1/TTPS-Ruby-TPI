@@ -10,15 +10,15 @@ class Product < ApplicationRecord
   has_many :items
 
   def stock
-    items.select(&:is_in_stock).count
+    items.where(product_id: self.id, saleable_id: nil).count
   end
 
   def self.in_stock
-    self.select { |p| p.stock > 0 }
+    joins(:items).where(items: {saleable_id: nil}).group(:product_id)
   end
 
   def self.scarce
-    self.select { |p| p.stock > 0 and p.stock <= 5 }
+    Product.find Item.joins(:product).group(:product_id).count(:product_id).select {| key, value | value <= 5}.keys
   end
 
   def add_items(amount)
