@@ -5,6 +5,10 @@ module Saleable
     errors = []
     if r.key?(:products) && r[:products].any?
       r[:products].each do |p|
+        if (!p.key? :id) || (!p.key? :amount)
+          errors.push 'invalid_product_request'
+          break
+        end
         null = false
         if Product.find_by(id: p[:id]).nil?
           errors.push 'invalid_product_id'
