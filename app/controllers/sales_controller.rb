@@ -15,12 +15,13 @@ class SalesController < ApplicationController
     if sale.nil? || (current_user != sale.user)
       head :not_found
     else
-      compound = []
+      compound = [:client]
       if (params.key? :include) && (!params[:include].nil?)
         compound.push :items if (params[:include].split '.').include? 'items'
       end
       render jsonapi: sale,
-             include: compound
+             include: compound,
+             fields: { client: [:name] }
     end
   end
 
