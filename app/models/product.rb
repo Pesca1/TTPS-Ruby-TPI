@@ -14,11 +14,11 @@ class Product < ApplicationRecord
   end
 
   def self.in_stock
-    joins(:items).where(items: {saleable_id: nil}).group(:product_id)
+    joins(:items).where(items: {saleable_id: nil}).group(:id)
   end
 
   def self.scarce
-    Product.find Item.joins(:product).group(:product_id).count(:product_id).select {| key, value | value <= 5}.keys
+    Product.find Item.where(saleable_id: nil).joins(:product).group(:product_id).count(:product_id).select {| key, value | value <= 5}.keys
   end
 
   def add_items(amount)

@@ -11,6 +11,9 @@ class UsersController < ApplicationController
       if new_user.errors[:name].any?
         res[:errors].push( { code: "invalid_name" } )
       end
+      if new_user.errors.details[:password].includes? error: :blank
+        res[:errors].push( { code: "blank_password" } )
+      end
       render json: res, status: :conflict
     end
   end
@@ -24,9 +27,12 @@ class UsersController < ApplicationController
     user = params.require(:user)
     if not user.key? :u or not user.key? :p
       res[:errors].push( { code: "invalid_request" } )
-      render json: res, status: :forbidden
-    elsif (u = User.find_by(name: user[:u], password: user[:p])).nil?
+      render json: res, status: :bad_request
+    elsif (u = User.find_by(name: user[:u])).nil?
       res[:errors].push( { code: "user_not_found" } )
+      render json: res, status: :forbidden
+    elsif u.password != user[:p]
+      res[:errors].push( { code: "incorrect_password" } )
       render json: res, status: :forbidden
     else
       t = Token.generate(u)
