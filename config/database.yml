@@ -46,5 +46,7 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-  encoding: utf8
-  adapter: pg
+  database: db73t8p8gk3gag
+  adapter: postgresql
+  host: <%= ENV['DATABASE_URL'] %>
+  password: 644998c67d9b79e57dacb7b5dc81b699c68651b2dd5e3c7c0078b5900b39fce5
