@@ -47,3 +47,4 @@ test:
 #
 production:
   encoding: utf8
+  adapter: pg
