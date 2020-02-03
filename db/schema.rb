@@ -80,7 +80,7 @@ ActiveRecord::Schema.define(version: 2019_11_29_213837) do
   end
 
   create_table "tokens", force: :cascade do |t|
-    t.string "token"
+    t.string "token", null: false
     t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

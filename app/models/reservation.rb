@@ -2,7 +2,7 @@ class Reservation < ApplicationRecord
   belongs_to :user
   belongs_to :client
   belongs_to :sale, optional: true
-  has_many :items, as: :saleable
+  has_many :items, as: :saleable, dependent: :nullify
 
   validates :user, presence: true
   validates :client, presence: true
