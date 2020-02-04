@@ -1,4 +1,6 @@
 class Product < ApplicationRecord
+  self.per_page = 25
+
   validates :code, presence: true, uniqueness: { case_sensitive: true }
   validates :description, presence: true, length: { maximum: 200 }
   validates :detail, presence: true

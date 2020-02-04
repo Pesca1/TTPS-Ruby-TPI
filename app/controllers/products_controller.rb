@@ -5,6 +5,8 @@ class ProductsController < ApplicationController
 
   def index
     filter = params[:q]
+    page_number = params[:page].to_i
+    page_number = 1 if page_number < 1
     if filter.nil? or filter == 'in_stock'
       products = Product.in_stock
     elsif filter == 'scarce'
@@ -15,7 +17,13 @@ class ProductsController < ApplicationController
       head :bad_request
       return
     end
-    render jsonapi: products
+    page = products.paginate(page: page_number)
+    render jsonapi: page,
+           links: { page: page_number, 
+                    next: (url_for(page: page.next_page)     if !page.next_page.nil?), 
+                    prev: (url_for(page: page.previous_page) if !page.previous_page.nil?),
+                    first: url_for(page: 1),
+                    last:  url_for(page: page.total_pages) }
   end
 
   def verify_product_code
